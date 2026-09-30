@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Ensures proper scaling and rendering on mobile devices (Responsive Design) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Analytics Portfolio</title>
+    
+    <!-- Google Fonts for Professional Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           1. CSS VARIABLES (Theme Configuration)
+           Centralized color scheme and font variables for easy customization.
+           ========================================================================== */
+        :root {
+            --primary-color: #0f172a;    /* Deep Slate/Navy for headers & primary elements */
+            --accent-color: #2563eb;     /* Professional Blue for buttons & highlights */
+            --bg-color: #f8fafc;         /* Light grayish-white for main background */
+            --card-bg: #ffffff;          /* Pure white for section cards */
+            --text-dark: #1e293b;        /* Dark gray for body text readability */
+            --text-muted: #64748b;       /* Muted gray for subtitles and dates */
+            --border-color: #e2e8f0;     /* Light gray for subtle borders */
+            --max-width: 1100px;         /* Max content width for large screens */
+            --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        /* ==========================================================================
+           2. BASE & RESET STYLES
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Smooth scrolling when clicking navigation links */
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ==========================================================================
+           3. NAVIGATION BAR
+           Sticky top navigation that adapts to all screen sizes.
+           ========================================================================== */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* ==========================================================================
+           4. HERO / ABOUT ME SECTION
+           Introductory area with headshot image space and personal narrative.
+           ========================================================================== */
+        .hero {
+            padding: 5rem 0 3rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        /* Desktop Layout using CSS Grid */
+        @media (min-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.25rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text p {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .headshot-container {
+            text-align: center;
+        }
+
+        /* Responsive Profile Image */
+        .headshot {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--card-bg);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Placeholder graphic if no profile picture is uploaded */
+        .headshot-placeholder {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background-color: var(--border-color);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-weight: 600;
+            border: 4px solid var(--card-bg);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ==========================================================================
+           5. SECTION LAYOUTS & COMPONENTS
+           ========================================================================== */
+        section {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin-top: 0.5rem;
+            border-radius: 2px;
+        }
+
+        /* Card Container Styles */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.8rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        /* ==========================================================================
+           6. PROJECTS SECTION
+           Grid layout displaying academic projects and technical work.
+           ========================================================================== */
+        .project-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .project-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background-color: #eff6ff;
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+        }
+
+        /* ==========================================================================
+           7. SKILLS SECTION
+           Categorized badge lists for technical, AI, and business skills.
+           ========================================================================== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .skills-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .skill-category h3 {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.4rem 0;
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+
+        .skill-list li::before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+        }
+
+        /* ==========================================================================
+           8. CONTACT & FOOTER SECTION
+           Functional links, form styling, and social connections.
+           ========================================================================== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .contact-info a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Simple Contact Form */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            background-color: var(--primary-color);
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION HEADER -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">[Your Name]</a>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#goals">Goals</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- HERO / ABOUT ME SECTION -->
+        <section id="about" class="hero">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <h1>[Your Name]</h1>
+                    <div class="subtitle">Business Analytics Student</div>
+                    <p>
+                        Welcome! I am a first-year student studying Business Analytics, passionate about translating complex datasets into actionable business strategies.
+                    </p>
+                    <p>
+                        My academic interests focus on predictive modeling, data visualization, and exploring how emerging artificial intelligence tools can automate workflows and enhance decision-making in real-world business environments.
+                    </p>
+                    <a href="#contact" class="btn">Get in Touch</a>
+                </div>
+                <div class="headshot-container">
+                    <!-- Replace the placeholder below with an <img> tag when you have a profile picture:
+                         <img src="your-photo.jpg" alt="[Your Name]" class="headshot"> -->
+                    <div class="headshot-placeholder">
+                        Your Photo Here
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACADEMIC PROJECTS SECTION -->
+        <section id="projects">
+            <h2 class="section-title">Academic Projects</h2>
+            <div class="project-grid">
+                
+                <!-- Project Card 1 -->
+                <div class="project-card">
+                    <div>
+                        <h3>Retail Sales Forecasting Analysis</h3>
+                        <p>
+                            Analyzed sample quarterly retail sales data using Excel pivot tables and statistical modeling to identify seasonal purchasing trends and optimize inventory distribution.
+                        </p>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag">Excel</span>
+                        <span class="tag">Data Modeling</span>
+                        <span class="tag">Business Strategy</span>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="project-card">
+                    <div>
+                        <h3>AI-Driven Workflow & Portfolio Site</h3>
+                        <p>
+                            Designed and deployed a modern portfolio website utilizing generative AI prompting (ChatGPT/Claude) for technical structure, code commenting, and optimized workflow documentation.
+                        </p>
+                    </div>
+                    <div class="project-tags">
+                        <span class="tag">HTML/CSS</span>
+                        <span class="tag">Prompt Engineering</span>
+                        <span class="tag">GitHub Pages</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SKILLS & COMPETENCIES SECTION -->
+        <section id="skills">
+            <h2 class="section-title">Skills & Technical Competencies</h2>
+            <div class="card">
+                <div class="skills-grid">
+                    
+                    <div class="skill-category">
+                        <h3>Analytics & Tools</h3>
+                        <ul class="skill-list">
+                            <li>Microsoft Excel (PivotTables, VLOOKUP)</li>
+                            <li>Data Visualization (Tableau/Power BI)</li>
+                            <li>Python Basics (Currently Learning)</li>
+                            <li>SQL Data Queries (Coursework)</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>AI Competencies</h3>
+                        <ul class="skill-list">
+                            <li>Generative AI Workflows (ChatGPT, Claude)</li>
+                            <li>Prompt Engineering & Optimization</li>
+                            <li>AI-Assisted Web Development</li>
+                            <li>Technical Documentation</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Business Acumen</h3>
+                        <ul class="skill-list">
+                            <li>Data Storytelling</li>
+                            <li>Market Research & Analysis</li>
+                            <li>Problem Structuring</li>
+                            <li>Professional Communication</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CAREER GOALS & INTERESTS SECTION -->
+        <section id="goals">
+            <h2 class="section-title">Career Goals & Interests</h2>
+            <div class="card">
+                <p>
+                    As I progress through my university education, my goal is to secure a summer analytics internship where I can apply quantitative analysis and data visualization tools to solve operational challenges.
+                </p>
+                <br>
+                <p>
+                    Long term, I aspire to work as a Business Intelligence Analyst or Management Consultant, helping organizations bridge the gap between complex engineering data and high-level corporate strategy.
+                </p>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact">
+            <h2 class="section-title">Connect With Me</h2>
+            <div class="contact-grid">
+                
+                <div class="contact-info">
+                    <p>
+                        I am always open to discussing new opportunities, analytics projects, or academic collaborations.
+                    </p>
+                    <br>
+                    <p><strong>Email:</strong> <a href="mailto:your.email@university.edu">your.email@university.edu</a></p>
+                    <p><strong>LinkedIn:</strong> <a href="https://linkedin.com" target="_blank" rel="noopener">linkedin.com/in/yourprofile</a></p>
+                    <p><strong>GitHub:</strong> <a href="https://github.com" target="_blank" rel="noopener">github.com/yourusername</a></p>
+                </div>
+
+                <div>
+                    <!-- Static Contact Form (Visual Interface) -->
+                    <form action="#" method="POST" onclick="event.preventDefault(); alert('Contact form demo! Please reach out directly via email.');">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="4" placeholder="Your message..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 [Your Name]. Built with HTML, CSS, and AI assistance.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
